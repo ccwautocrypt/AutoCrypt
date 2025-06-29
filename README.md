@@ -172,4 +172,148 @@ SELECT * FROM users WHERE username='admin' and password='password' OR 1=1 --'
 
 ![image](https://github.com/user-attachments/assets/902a9ceb-7259-48bf-b598-a61877879848)
 
-메모리는 위와 같은 구조로 되어 있는데, 가장 기초적인 buffer overflow의 경우, 
+메모리는 위와 같은 구조로 되어 있는데, 가장 기초적인 buffer overflow의 경우, Heap(동적으로 할당)이나 stack(정적으로 할당)에 많은 양의 데이터를 부하해 오류를 일으킨다. 둘은 약간의 차이가 있는데, stack-beased의 경우 인접 메모리를 덮어 써 원하는 코드를 실행시키는 것을 기대하고, heap-based의 경우 다른 heap 데이터, pointer 등을 덮어 써 의도치 않은 함수나 코드의 시행을 기대한다. 
+
+scanf_s 등 API 수준에서의 확인으로 예방할 수도 있다.
+
+---
+
+- Canary: return address앞에 임의의 값을 넣고, 이 값이 변경되는 경우 문제가 있다고 판단하는 방어 방법
+- Non-executable Memory(DEP): 특정 메모리 주소에서는 코드가 실행될 수 없게 하는 것.
+
+---
+
+**Return-to-libc**
+
+Buffer overflow를 이용해 return address 등을 변경하여 DEP영역에 있는 syscall, libc등의 명령어를 시행하도록 하는 것. 
+
+---
+
+**ASRL(Address Space Layout Randomization)**
+
+Stack, Heap, code 등의 base address를 무작위로 섞어 위의 방법으로 찾지 못하게 하는 것. 하지만 32-bit machine의 경우 brute-force로 주소를 찾을 수도 있음.
+
+---
+
+**ROP(Return Oriented Programming)**
+
+```
+1) ret → 0x08049010  → 실행: pop eax ; ret
+   esp += 4 → eax ← 1
+
+2) ret → 0x08049020  → 실행: pop ebx ; ret
+   esp += 4 → ebx ← 2
+
+3) ret → 0x08049030  → 실행: add eax, ebx
+   eax = 3
+
+4) ret → 0x08049040  → 실행: mov [ecx], eax
+   → 원하는 주소에 3 기롣
+```
+
+위와 같이 ret가 반복되는 코드 부분(gadget)을 찾아, 이를 이용해 스택 너머로 이동 가능
+
+
+# CTF? Wargame?
+
+CTF(Capture the flag): 보안을 우회해 FLAG를 탈취하는 방식의 해킹 문제? 대회?
+Wargame: 모의 해킹 환경을 구상해 원하는 목표를 달성하는 것. CTF도 이의 한 종류
+
+---
+
+**dreamhack wargame : session-basic**
+
+```
+#!/usr/bin/python3
+from flask import Flask, request, render_template, make_response, redirect, url_for
+
+app = Flask(__name__)
+
+try:
+    FLAG = open('./flag.txt', 'r').read()
+except:
+    FLAG = '[**FLAG**]'
+
+users = {
+    'guest': 'guest',
+    'admin': FLAG
+}
+
+@app.route('/')
+def index():
+    username = request.cookies.get('username', None)
+    if username:
+        return render_template('index.html', text=f'Hello {username}, {"flag is " + FLAG if username == "admin" else "you are not admin"}')
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        try:
+            pw = users[username]
+        except:
+            return '<script>alert("not found user");history.go(-1);</script>'
+        if pw == password:
+            resp = make_response(redirect(url_for('index')) )
+            resp.set_cookie('username', username)
+            return resp 
+        return '<script>alert("wrong password");history.go(-1);</script>'
+
+app.run(host='0.0.0.0', port=8000)
+```
+
+../admin으로 가면
+
+{"2576d97a2b84bace52e5f02cdcb3e5d7e694dfb6ce5b7b28409cf28d5b68d76e":"admin"}
+
+을 확인할 수 있는데, 로그인 후 생긴 sessionid 쿠키를 해당 admin의 쿠키로 변경하면 admin으로 로그인 해 FLAG를 얻을 수 있다.
+
+---
+
+**webhacking.kr: old-01**
+
+![image](https://github.com/user-attachments/assets/5eb4df0d-352c-4e84-a562-e34109483968)
+
+```
+<?php
+  include "../../config.php";
+  if($_GET['view-source'] == 1){ view_source(); }
+  if(!$_COOKIE['user_lv']){
+    SetCookie("user_lv","1",time()+86400*30,"/challenge/web-01/");
+    echo("<meta http-equiv=refresh content=0>");
+  }
+?>
+<html>
+<head>
+<title>Challenge 1</title>
+</head>
+<body bgcolor=black>
+<center>
+<br><br><br><br><br>
+<font color=white>
+---------------------<br>
+<?php
+  if(!is_numeric($_COOKIE['user_lv'])) $_COOKIE['user_lv']=1;
+  if($_COOKIE['user_lv']>=4) $_COOKIE['user_lv']=1;
+  if($_COOKIE['user_lv']>3) solve(1);
+  echo "<br>level : {$_COOKIE['user_lv']}";
+?>
+<br>
+<a href=./?view-source=1>view-source</a>
+</body>
+</html>
+```
+
+쿠키를 3보다 크고 4보다는 작은 실수로 바꾸면 해결할 수 있다.
+
+이외에도 netcat을 이용한 시스템 해킹 문제도 시도 했는데, 해당 노트북을 집에 두고 와서 못 적었습니다...
+
+
+---
+
+**Dgitan Forensic**
+2023 암호분석경진대회. PDF 참고.
