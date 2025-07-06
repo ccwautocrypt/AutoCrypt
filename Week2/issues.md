@@ -27,3 +27,7 @@ https://www.youtube.com/watch?v=waKxjJURBxA
 &nbsp;
 
 다른 Vehicle 대상 CTF 찾아봤는데 현재 실행 가능한 것을 찾지 못함....
+
+&nbsp;
+
+blockharbor prooving ground에 있는 문제들 앞쪽 몇개는 간단해 보여서 시뮬레이터만 가능하면 풀 수 있을 듯 한데...
