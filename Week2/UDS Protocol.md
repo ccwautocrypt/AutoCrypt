@@ -11,7 +11,8 @@ OSI 7 layer model
 네트워크 통신을 7개의 계층으로 나눈 모델로, 순서대로 Physical, Data Link, Network, Transport, Session, Presentation, Application 계층으로 정의되어 있다. CAN이나 LIN 같은 차량 통신 프로토콜은 1~4의 종단 통신부터 실제 기계신호 전달에 속해 있고, UDS의 경우 5, 7의 상위 계층을 모두 활용한다. UDS는 UDSonCAN, UDSonLIN과 같이 각 하위 계층 프로토콜마다 변환해주는 역할과, 해당 변환을 모두 종합해주는 서로 다른 기준, 표준들을 모두 포괄적으로 지칭한다. 그림에서 session 계층과 application 계층을 모두 통틀어 UDS라고 지칭한다. 
 
 
-UDS 데이터 프레임
+
+UDS 데이터 프레임: Request
 
 ![image](https://github.com/user-attachments/assets/64d941ca-a100-469a-bb26-0a1c13c27d8d)
 
@@ -23,3 +24,41 @@ UDS 데이터 프레임은 위와 같은 구조로 되어있다.
 + Data: 실제 데이터 부분
 + Padding: 특정 프로토콜은 데이터의 크기를 맞추어야 하기에, 0x00 등으로 채움
 
+
+
+UDS 데이터 프레임: Response
+
+![image](https://github.com/user-attachments/assets/adfff2a7-4370-42b1-859f-92807347d98e)
+
++ DID (Data Identifier): 응답 ID. 이후에는 Padding이라 적어놓았지만 필요한 데이터가 들어간다.
++ Negative Response SID: 0x7F로, negative response를 나타낸다.
++ Rejected SID: 거부된 SID
++ NRC (Negative Response Code): 어떤 이유로 negative response가 나왔는지 명시한다. 가령, 0x13의 경우 메시지 길이가 맞지 않는 경우를 뜻한다.
+
+응답의 경우 조금 다른 데이터 프레임을 띈다. 위쪽은 positive, 아래쪽은 negative 응답이다. Positive의 경우, 요청받은 SID에 대응하는 DID와 함께 필요한 데이터를 돌려준다. 하지만 negative의 경우, negative임을 알리기 위한 SID(0x7F)와 함께 거절된 요구와 왜 거부되었는지를 함께 반환한다. 
+
+
+
+ISO-TP (ISO Transport Protocol)
+
+UDS의 경우 CAN보다 더 긴 데이터 프레임을 지원한다. 따라서, 상황에 따라 CAN의 데이터 길이에 허용되지 않는 크기의 데이터를 수신할 때도 있는데, 이와 같은 경우 긴 데이터를 분할 전송해 재조립하는 방식으로 데이터를 송수신한다. 이러한 방식을 ISO-TP라고 한다. 
+
+![image](https://github.com/user-attachments/assets/04c57794-2a2b-4ab6-9c31-54c89d061e68)
+
+초기 client의 요청(Single Frame)에, 보내야할 데이터 양이 CAN single frame에 모두 들어가면 한번의 응답으로 종료된다. 하지만, 그렇지 못할 경우에, ECU는 우선 전체 패킷 길이와 데이터 청크에 관한 정보(First Frame)를 우선 보낸다. 그 이후, client가 FF를 수신하면 FC를 보내 나머지 데이터를 어떻게 보낼지 알려준다. FC를 수신한 ECU는 그 이후 데이터를 분할해 여러개의 CF들로 나누어 송신한다. 
+
+
+
+몇 가지 예시
+```
+Server               Client
+                  <-- 10 03
+50 03 --> 
+```
+
+
+
+보안상 취약점?
++ No Encryption. Plaintext로 보냄
++ Seed-Key 방식의 인증이 단순함
++ Denial of Service
