@@ -73,6 +73,8 @@ Server               Client
 7F 27 35 -->                  // negative인 경우. 0x27(key 확인)요청이 0x35(invalid key)로 인해 거절(0x7F)됨.
 ```
 
+&nbsp;
+
 Multiple Response. 특정 데이터(들) 요구
 ```
 Server                           Client
