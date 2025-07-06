@@ -77,6 +77,7 @@ candump 명령어로 차량에서 오가는 CAN 통신 신호들을 모두 확�
 cansniffer vcan0
 ```
 그러나, 굉장히 많은 신호들이 빠르게 발생하기에 candump를 주시하면서 유의미한 수확을 거두기 어렵다. 따라서, cansniffer라는 유용한 명령어를 사용해볼 수 있다. cansniffer는 신호를 ID별로 정리해 보여준다. 또한, c + Enter로 변화하는 바이트를 붉게 표현할 수 있으며, Shift + 3 + Enter로 상시변화하는 바이트는 붉게 표현하는 바이트에서 제거할 수 있다. 이 상태에서 차에 어떤 변화가 생긴다면, 쉽게 신호를 포착할 수 있을 것이다.
+
 ---
 ![image](https://github.com/user-attachments/assets/da6944e7-daa0-459b-b484-3ceaeaf0b6ee)
 
