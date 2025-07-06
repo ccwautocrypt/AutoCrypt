@@ -14,6 +14,8 @@ Challenges --> Getting Started --> Canyou find the interface? 시도
 
 &nbsp;
 
+https://www.youtube.com/watch?v=waKxjJURBxA
+
 도저히 어디서 simulator를 찾으라는 건지 알 수 없어서 풀이 영상 시청
 
 &nbsp;
