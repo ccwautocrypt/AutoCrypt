@@ -49,11 +49,43 @@ UDS의 경우 CAN보다 더 긴 데이터 프레임을 지원한다. 따라서, 
 
 
 
-몇 가지 예시
+통신 예시
+
+Single Response. 보안 인증 요구.
 ```
 Server               Client
-                  <-- 10 03
-50 03 --> 
+
+                  <-- 10 03   // Extended Session 요청. SID 0x10
+
+50 03 -->                     // 허가. DID 0x50
+
+                  <-- 27 01   // seed 요청. SID 0x27
+
+67 01 seed -->                // 허가. DID 0x67
+
+              <-- 27 02 key   // key 송신. SID 0x27. sub-function byte로 seed 수신과 구분.
+
+67 01 -->                     // positive인 경우.
+7F 27 35 -->                  // negative인 경우. 0x27(key 확인)요청이 0x35(invalid key)로 인해 거절(0x7F)됨.
+```
+
+Multiple Response. 특정 데이터(들) 요구
+```
+Server                           Client
+
+            <-- 22 F1 90 F1 87 F1 11 ..    // 데이터 읽어(0x22)들이기. 0xF190, 0xF187, 0xF111 ... 요구.
+
+62 10 14 -->                               // positive. 총 응답 길이 0x14 = 20 bytes. (예시)
+
+                          <-- 30 00 0A     // FC: OK to continue, no block size limit, 10ms delay
+
+21 62 F1 90 57 4D 5A 5A -->                // CF #1: SID(0x62) + DID F190 데이터
+
+22 5A 32 33 34 35 36 F1 -->                // CF #2: F1 87부터 계속
+
+23 87 12 34 56 78 9A BC -->                // CF #3: DID F187
+
+24 F1 11 00 01 02 03 04 05 -->             // CF #4: DID F111
 ```
 
 
