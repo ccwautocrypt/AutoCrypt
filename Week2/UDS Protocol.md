@@ -5,15 +5,16 @@ UDS(Unified Diagnostic Services) 프로토콜은 ECU 점검(Diagnosis)을 위해
 
 &nbsp;
 
+### OSI 7 layer model
+
 ![image](https://github.com/user-attachments/assets/983f4913-4088-446c-ab16-fb1179bbf3f2)
 이미지 출처: CSS Electronics
 
-OSI 7 layer model
 네트워크 통신을 7개의 계층으로 나눈 모델로, 순서대로 Physical, Data Link, Network, Transport, Session, Presentation, Application 계층으로 정의되어 있다. CAN이나 LIN 같은 차량 통신 프로토콜은 1~4의 종단 통신부터 실제 기계신호 전달에 속해 있고, UDS의 경우 5, 7의 상위 계층을 모두 활용한다. UDS는 UDSonCAN, UDSonLIN과 같이 각 하위 계층 프로토콜마다 변환해주는 역할과, 해당 변환을 모두 종합해주는 서로 다른 기준, 표준들을 모두 포괄적으로 지칭한다. 그림에서 session 계층과 application 계층을 모두 통틀어 UDS라고 지칭한다. 
 
 &nbsp;
 
-UDS 데이터 프레임: Request
+### UDS 데이터 프레임: Request
 
 ![image](https://github.com/user-attachments/assets/64d941ca-a100-469a-bb26-0a1c13c27d8d)
 
@@ -27,7 +28,7 @@ UDS 데이터 프레임은 위와 같은 구조로 되어있다.
 
 &nbsp;
 
-UDS 데이터 프레임: Response
+### UDS 데이터 프레임: Response
 
 ![image](https://github.com/user-attachments/assets/adfff2a7-4370-42b1-859f-92807347d98e)
 
@@ -40,7 +41,7 @@ UDS 데이터 프레임: Response
 
 &nbsp;
 
-ISO-TP (ISO Transport Protocol)
+### ISO-TP (ISO Transport Protocol)
 
 UDS의 경우 CAN보다 더 긴 데이터 프레임을 지원한다. 따라서, 상황에 따라 CAN의 데이터 길이에 허용되지 않는 크기의 데이터를 수신할 때도 있는데, 이와 같은 경우 긴 데이터를 분할 전송해 재조립하는 방식으로 데이터를 송수신한다. 이러한 방식을 ISO-TP라고 한다. 
 
@@ -52,7 +53,7 @@ UDS의 경우 CAN보다 더 긴 데이터 프레임을 지원한다. 따라서, 
 ---
 &nbsp;
 
-통신 예시
+### 통신 예시
 
 Single Response. 보안 인증 요구.
 ```
@@ -95,7 +96,8 @@ Server                           Client
 ---
 &nbsp;
 
-보안상 취약점?
+### 보안상 취약점?
+
 + No Encryption. Plaintext로 보냄
 + Seed-Key 방식의 인증이 단순함
 + Denial of Service
