@@ -67,5 +67,22 @@ https://www.bluetooth.com/specifications/specs/core-specification-6-1/
 > 가장 최신 핸즈프리 profile
 -  Service Discovery Profile (SDP): Service 검색에 사용. Classic에서만 사용함.
 -  Security Manager (SM): 암호화 통신에 필요한 보안 알고리즘. Pairing, Bonding, Ecryption reestablishment의 세가지 절차가 진행된다. GATT, ATT와 연동하여 데이터 보안 유지.
--  Generic Attribute Profile (GATT): 
--  Attribute Protocol (ATT): 
+-  Attribute Protocol (ATT): GATT를 포함해 서비스와 기타 통신에 사용괴는 데이터 규정. 데이터 + 속성정보 (UUID, 접근권한, 핸들 등)로 구성되어 있다. Client-server 구조로 되어 있다.
+> GATT Client: Server에게 request를 보낸다. 연결이 되는 순간 service discovery를 통해 서버가 어떤 서비스를 제공하는지 탐색한다.
+> GATT Server: 서비스를 제공하는 주체. Client 에게 request를 받아 상응하는 response를 제공한다. 
+-  Generic Attribute Profile (GATT): ATT 기반으로 service와 characteristic을 구성.
+-  Logical Link Control and Adaptation Protocol (L2CAP): Host의 가장 핵심 기능. 데이터 전송에 대한 규약 포함.
+-  Link Layer (LL): 물리적 계층과 상호작용하며 블루투스 연결을 관리하는 중간 계층. 연결 상태 관리, 암/복호화 등을 담당. Role과 State를 통해 디바이스를 제어함.
+> Role
+> - Master: 연결 시도. 전체 연결 상태 관리
+> - Slave: Master의 요청을 받아들이고 연결되는 대상.
+> - Advertiser: Advertising packet을 보내는 역할
+> - Scanner: Advertiser를 스캔하는 역할. Passive scanning, active scanning 두가지가 있다.
+>
+> State
+> - Standby: 대기상태
+> - Advertising: Advertising Packet을 보내거나, 상대 기기와 요청, 응답을 주고받을 수 있는 상태
+> - Scanning: Advertising Channel 에서 스캔 중인 상태
+> - Initiating: Advertising Packet을 받고 연결 요청을 보낸 상태
+> - Connenction: 연결~
+- Link Manager Protocol (LMP): Classic에서만 사용. 장치간의 물리적 링크를 설정하고 제어하는 프로토콜.
