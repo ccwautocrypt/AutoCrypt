@@ -19,7 +19,6 @@ Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)
 
 &nbsp;
 ---
-&nbsp;
 
 ### 기초적인 구조
 ```
@@ -39,7 +38,6 @@ Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)
 
 &nbsp;
 ---
-&nbsp;
 
 ### Core Specification
 
@@ -104,7 +102,6 @@ https://www.bluetooth.com/specifications/specs/core-specification-6-1/
 
 &nbsp;
 ---
-&nbsp;
 
 ### 블루투스 통신
 
