@@ -1,15 +1,13 @@
 Bluetooth Stack
+===============
 
 &nbsp;
-
 Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)에 대한 software implementation이다. Bluetooth stack이라고 함은, bluetooth protocol들의 implementation.
 
 &nbsp;
 ---
 &nbsp;
-
 블루투스?
-
 &nbsp;
 
 - Bluetooth Classic: 가장 이른 형태의 블루투스. 이어폰, 스피커, 키보드 등에 적용되는 방식. 대용량 데이터 전송을 지원함.
