@@ -6,7 +6,7 @@ Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)
 &nbsp;
 ---
 &nbsp;
-블루투스?
+### 블루투스?
 &nbsp;
 
 - Bluetooth Classic: 가장 이른 형태의 블루투스. 이어폰, 스피커, 키보드 등에 적용되는 방식. 대용량 데이터 전송을 지원함.
@@ -21,7 +21,7 @@ Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)
 ---
 &nbsp;
 
-기초적인 구조
+### 기초적인 구조
 ```
 ┌────────────────────────────┐
 │       Application          │  ← 사용자의 프로그램/앱
@@ -41,7 +41,7 @@ Protocol stack이란, 컴퓨터 네트워킹 프로토콜 모음(protocol suite)
 ---
 &nbsp;
 
-Core Specification
+### Core Specification
 
 https://www.bluetooth.com/specifications/specs/core-specification-6-1/
 
@@ -106,7 +106,7 @@ https://www.bluetooth.com/specifications/specs/core-specification-6-1/
 ---
 &nbsp;
 
-블루투스 통신
+### 블루투스 통신
 
 Advertising, Scanning, Connection Request, Service Discovery, GATT Operation 등의 과정을 거친다.
 
