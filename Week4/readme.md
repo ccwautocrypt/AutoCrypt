@@ -38,7 +38,9 @@ Paramater
 > 3. B --> A 0x110D 서비스의 handle 반환(0x03)
 
 <img width="670" height="423" alt="image" src="https://github.com/user-attachments/assets/c2073224-77ce-45b6-a8cd-66a276349cd3" />
+
 출처: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-54/out/en/host/logical-link-control-and-adaptation-protocol-specification.html 
+
 L2CAP: SDP, RFCOMM 등 상위 프로토콜과 HCI 등 하위 프로토콜 사이에 위치. 중간계층으로 데이터 관리 등을 담당.
 ```
 Multiplexing: 상위 프로토콜들에서 여러 profile을 동시에 사용할 수 있도록 채널 관리
