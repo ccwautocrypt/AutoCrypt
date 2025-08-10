@@ -46,3 +46,10 @@ Root Cause
 - 45432: 파라미터 검증 절차 없음
 - 45433: 예외 처리 미흡
 - 45434: 메모리 관리 미흡.
+
+---
+
+### Zero day?
+
+Integer Overflow in TESLA Model3 
+https://nvd.nist.gov/vuln/detail/CVE-2025-2082?utm_source=chatgpt.com
