@@ -5,7 +5,6 @@ Linux Blueborn
 https://blog.naver.com/crehacktive3/221099845610
 
 CVE-2017-0785 Detail
-
 https://nvd.nist.gov/vuln/detail/CVE-2017-0785
 https://www.cbnu.ac.kr/icc/selectBbsNttView.do?key=50&bbsNo=77&pageIndex=1&pageUnit=10&searchCnd=all&nttNo=3254
 
