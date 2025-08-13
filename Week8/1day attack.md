@@ -11,21 +11,7 @@ https://pcacybersecurity.com/resources/advisory/perfekt-blue
 
 OpenSynergy의 BlueSDK 블루투스 스택에서 발견된 Chaining을 이용한 RCE 공격. Mercedes-Benx, Volkswagen, Skoda 등 여러 브랜드 차량에 영향. 
 
----
-
-Chaining 구조
-- CVE-2024-45431: L2CAP CID 검증 없음
-- CVE-2024-45432: RFCOMM 함수 종료 오류
-- CVE-2024-45433: RFCOMM 잘못된 인자 전달ack?
-===
-
 공개되었지만 아직 패치되지 않은 취약점.
-
----
-
-PerfektBlue
-
-OpenSynergy의 BlueSDK 블루투스 스택에서 발견된 Chaining을 이용한 RCE 공격. Mercedes-Benx, Volkswagen, Skoda 등 여러 브랜드 차량에 영향. 
 
 ---
 
