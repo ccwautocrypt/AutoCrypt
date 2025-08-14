@@ -1,7 +1,6 @@
-ML을 사용한 CAN attack detection
+ML-based CAN attack detection
 ===
 
----
 
 ## CAN-Bus Attack Detection With Deep Learning, IEEE Transactions on Intelligent Transportation Systems, 2021
 
