@@ -1,4 +1,4 @@
-2025 fall Co-op(AUTOCRYPT) 사전교육
+2025 Fall Co-op(AUTOCRYPT) 사전교육
 ===
 
 - Week1: Orientation
