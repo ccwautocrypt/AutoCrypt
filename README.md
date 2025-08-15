@@ -10,8 +10,7 @@
 - Week7: Bluetooth Vulnerabilities
 - Week8: UN Regulation 155, 1-day attack(on vehicle)
 
----
+
 
 20210617 Chanwo Cho
-
 방학동안 지도해주신 김정현 조교님 감사합니다.
