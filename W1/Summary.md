@@ -68,7 +68,7 @@ EOF: End of Field
 ```
 - Controller Area Network
 - 0(Dominant)와 1(recessive)로 신호 전달
-- 
+
 ```
 CAN Error Senario
 #1 Bit error
@@ -99,9 +99,41 @@ CAN Error Senario
 
 ### OBD
 
+```
+OBD2onCAN Frame
+┌─────┬────────┬────┬─────┬─────┬─────┬─────┬─────┬────────┐
+| CID | #bytes |MODE| PID |  A  |  B  |  C  |  D  | Unused |
+└─────┴────────┴────┴─────┴─────┴─────┴─────┴─────┴────────┘
+
+- CID: CAN ID
+- #bytes: # of bytes in remaining data
+- MODE / PID: Defining requesting data. SAE J1979에 있음.
+- A ~ Unused: Data bytes. Last one unused.
+```
+- On-Board Diagnostics
+- 차량 상태 진단 가능 (속도, 온도, 센서, 고장 등등. Mode 변경해 다양한 정보 요청)
+- DoCAN(ISO-TP?)로 통신 (자세한건 3주차 UDS 확인)
+
 ---
 
 ### UDS
+
+```
+UDS on CAN Frame
+┌─────┬─────┬─────┬─────┬──────────┬─────────┐
+| CID | PCI | SID | Sub |   DATA   | Padding |
+└─────┴─────┴─────┴─────┴──────────┴─────────┘
+
+- CID: CAN ID
+- PCI: ISO-TP(확장된 통신)에 사용
+- SID: Service ID. OBD의 MODE-PID와 유사한 역할
+- DATA
+- Padding
+```
+
+- Unified Diagnostic Service
+- 차량 상태 진단 가능
+- OBD보다 더 광범위한 데이터를 다룰 수 있음.
 
 ---
 
@@ -142,7 +174,5 @@ CAN Error Senario
 ---
 
 ### V2G
-
----
 
 ---
