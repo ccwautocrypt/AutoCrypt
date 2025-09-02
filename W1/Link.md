@@ -13,3 +13,9 @@ https://autosw.tistory.com/110
 DoIP
 
 https://autosw.tistory.com/135
+
+---
+
+GNSS Vulnerability
+
+https://skybrary.aero/articles/gnss-jamming-and-spoofing
