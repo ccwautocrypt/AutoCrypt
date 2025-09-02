@@ -18,6 +18,10 @@
 ```
 
 ---
+
+### TCP/UDP
+
+---
 ### ECU
 
 - Electronic Control Unit
@@ -139,13 +143,78 @@ UDS on CAN Frame
 
 ### Automotive Ethernet
 
+```
+Automotive Ethernet Topology
+
+     Central Switch(Gateway?)
+  ┌──────────────┼──────────────┐
+ Zone          Zone           Zone
+Switch        Switch         Switch
+  ├─ ECU         ├─ ECU         ├─ ECU
+  ├─ ECU         ├─ ECU         ├─ ECU
+  ├─ ECU         ├─ ECU         ├─ ECU
+  ├─ ...         ├─ ...         ├─ ...
+
+```
+- CAN을 대체하기 위한 ethernet
+- CAN은 모든 ECU가 연결된 bus 구조
+- 각 ECU, sensor 등이 switch에 연결. 이런 구조가 차량 곳곳에 국지적으로 있음(zonal structure)
+- 각 구역의 switch가 중앙의 central switch에 또 연결되어 있음 (여긴 더 높은 대역폭)
+
+```
+Automotive Ethernet Frame (Example)
+┌──────────┬─────┬─────────────────┬────────────┬────────┬──────┬─────────┬─────┐
+| Preamble | SOF | Destination Add | Source Add | 802.1Q | Type | Payload | FCS |
+└──────────┴─────┴─────────────────┴────────────┴────────┴──────┴─────────┴─────┘
+
+- Preamble: For Synchronization
+- SOF: Start of Frame
+- Destination/Source Address: MAC address of sender and reciever
+- 802.1Q: IEEE 802.1Q is VLAN standard. VLAN 구현용으로, QoS 제공을 위해...
+- Type: Payload에 포함된 데이터의 타입 표시. (IPv4등)
+- Payload
+- FCS: 32bit CRC
+```
+
 ---
 
 ### DoIP
 
+```
+┌──────────────────── Ethernet Frame ────────────────────┐
+               ┌──────────────── IP Frame ───────────────┐
+                        ┌─────────── TCP Frame ──────────┐
+                                  ┌───── DoIP Frame ─────┐
+┌──────────────┬────────┬─────────┬──────────┬───────────┐
+| Ethernet Hdr | IP Hdr | TCP Hdr | DoIP Hdr | UDS Frame |
+└──────────────┴────────┴─────────┴──────────┴───────────┘
+대략 이런 구조?
+
+DoIP Frame
+┌──────────────────┬──────────────────────┬──────────────┬────────────────┬─────────┐
+| Protocol Version | INV Protocol Version | Payload Type | Payload Length | Payload |
+└──────────────────┴──────────────────────┴──────────────┴────────────────┴─────────┘
+- Protocol Version
+- INV Protocool Version: Protocol Version이 invert된 것. 버전 확인용
+- Payload Type: Requesting Payload? (identification, diagnostic message 등)
+- Payload Length
+- Payload
+```
+
+- Diagnosis on IP
+- Automotive Ethernet을 사용하는 경우, Diagnosis를 위한 protocol
+- UDS를 Payload에 포함하는 형태로 Ethernet과 호환하려는 듯 함.
+
+- Known TCP/UDP/IP vulnarabilities --> 전부 Inherit
+- Backend / Gateway vulnarabilities (Buffer overflow, DoS등 가능성 있음)
+
 ---
 
 ### SOME/IP
+
+- Scalable service-Oriented MiddleWarE over IP)
+- Automotive Ethernet에서 기존의 Vehicle CAN을 대체한다고 생각하면 될 것 같다.
+- 
 
 ---
 
