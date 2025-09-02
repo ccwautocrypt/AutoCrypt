@@ -19,3 +19,13 @@ https://autosw.tistory.com/135
 GNSS Vulnerability
 
 https://skybrary.aero/articles/gnss-jamming-and-spoofing
+
+---
+
+Automotive Ethernet
+
+https://www.youtube.com/watch?v=ltGMOZxMpoA
+
+https://watchout31337.tistory.com/430
+
+---
