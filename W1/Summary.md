@@ -212,9 +212,32 @@ DoIP Frame
 
 ### SOME/IP
 
+```
+SOME/IP Message format
+┌───────────────────────────────────────────────────────────────────┐
+│               Message ID (Service ID / Method ID)                 │ 
+├───────────────────────────────────────────────────────────────────┤
+|                              Length                               |
+├───────────────────────────────────────────────────────────────────┤
+|                Request ID (Client ID / Session ID)                |
+├──────────────────┬───────────────────┬──────────────┬─────────────┤
+| Protocol Version | Interface Version | Message Type | Return Code |
+├──────────────────┴───────────────────┴──────────────┴─────────────┤
+|                              Payload                              |
+└───────────────────────────────────────────────────────────────────┘
+
+- Message ID: Service ID(16bit) + Method/Event ID(16bit). 어떤 service와 그 service안의 어떤 method/event 호출하는지 식별
+- Length
+- Request ID: Client ID(16bit) + Session ID(16bit). 어떤 client가 요청했는지 식별. Session ID는 동일 session일 경우 동시 처리 가능.
+- Protocol Version: SOME/IP protocol version
+- Interface version: Service interface version
+- Message Type: Request, Request_no_return, Notification 등 메세지 타입
+- Return Code: 성공, 실패 등 처리 결과 코드
+```
+
 - Scalable service-Oriented MiddleWarE over IP)
 - Automotive Ethernet에서 기존의 Vehicle CAN을 대체한다고 생각하면 될 것 같다.
-- 
+- ECU가 다른 ECU에게 service 요청하는 식으로 이해.
 
 ---
 
