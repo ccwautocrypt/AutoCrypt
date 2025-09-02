@@ -51,11 +51,11 @@
 ### CAN
 
 ```
+CAN bus frame
 ┌───┬────────────┬───┬───┬─────┬───//───┬───────────┬─────┬───────┐
 |SOF|     ID     |RTR|IDE| DLC |  DATA  |    CRC    | ACK |  EOF  |
 └───┴────────────┴───┴───┴─────┴───//───┴───────────┴─────┴───────┘
 
-CAN bus frame
 SOF: Start of Frame. 1 dominant bit
 ID: Frame identifier. 신호 우선순위 결정. Classical CAN은 11bit, CAN-FD 같은건 29bit도 지원
 RTR: 데이터 송신 / 수신 여부
@@ -68,8 +68,9 @@ EOF: End of Field
 ```
 - Controller Area Network
 - 0(Dominant)와 1(recessive)로 신호 전달
-
+- 
 ```
+CAN Error Senario
 #1 Bit error
 - CAN node는 CAN bus를 항상 listen하고 있음.
 - 자기가 전송한 데이터와 비트가 다를때.
