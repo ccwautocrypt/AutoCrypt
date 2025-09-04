@@ -14,3 +14,5 @@ https://auto-jira.atlassian.net/wiki/spaces/tbdsti/pages/2225504280/Git+cstp_tes
 - Static Analysis Testing
 
 4. 남는 시간에 Bluetooth Stack 개발할거 공부...
+
+5. CSTP Compliance 환경설정
