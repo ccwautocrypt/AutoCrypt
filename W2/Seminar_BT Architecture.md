@@ -15,6 +15,8 @@ Bluetooth Core Specification?
 - Bluetooth SIG Qualificiation Process를 통과하려면 여기를 준수해야 한다. (아니면 그냥 통신 장비임)
 - Core Specification + 내가 원하는 기능 추가 가능. Airpods 같은건 Apple 기기 끼리만 추가 작동하는 기능들이 추가되어 있음.
 
+---
+
 Core System Archetecture
 ===
 
@@ -114,6 +116,7 @@ Core architectural block: Controller
 - PBR(Phase Based Ranging): 파형의 위상차를 통해 거리측정하는 방식
 - RTT(Round Trip Timimg): 패킷의 회신까지 걸리는 시간으로 측정하는 방식
 
+---
 
 Transport Architecture
 ===
