@@ -64,7 +64,10 @@ Core architectural block: Host
 - Security Manager Protocol(BLE): generate encryption key/identity key and store
 - peer device의 SMP와 L2CAP channel을 통해 직접 상호작용.
 - 생성된 키는 controller에 제공하며 향후에 authentication / pairing에 사용함.
+- Why SMP?
 - BT에서는 해당 역할을 controller의 Link Manager가 겸임함.
+- BT에서는 Profile에 따라 protocol이 다 다름. + 옛날이라 PIN입력 -> 링크 키 생성 -> 암호화가 끝이라 생각해서 controller안에 다 집어넣음.
+- BLE는 저전력 요구 + ATT/GATT로 Profile 간의 통신을 포함, 각종 범용적 기능을 모두 규정함. 여기서 보안 관련이 host쪽으로 넘어가게 되면서 SMP가 따로 생기게 됨.
 - .
 - Attribute Protocol(BLE): peer device의 속성값을 r/w 하기 위한 protocol.
 - ATT server, ATT client로 나누어져 있음. ATT client는 perr device의 ATT server와 L2CAP channel(ATT 전용으로 예약되어 있음)을 통해 상호작용.
@@ -93,15 +96,24 @@ Core architectural block: Controller
 - Logical link: 그 물리 링크 위에서 역할/트래픽 종류별로 나눠진 논리적 경로
 - .
 - Baseband Resource Manager
+- 타임슬롯/주파수 홉핑/패킷 스케줄링을 조율. ACL과 SCO(eSCO)의 슬롯 예약/우선순위를 조정해 충돌 없이 무선 자원을 배분.
+- 일단 뭐하는지 잘 모르겠어서 더 찾아봐야 할 듯.
 - .
-- Link Controller: 
+- Link Controller: Encode/Decode bluetooth packet from data payload. (+ parameters related to below layers)
+- packet formatting, FEC, AQL, flow control,...
 - .
-- PHY
+- PHY: Transmitt / Recieve in physical channel.
+- 2.4GHz ISM.
 - .
-- Isochoronous Adaptation Layer
+- Isochoronous Adaptation Layer: Enables isochronous communication. (even between different frames)
+- 원래는 없던 계층인데, A2DP등 동시성이 필요한 경우가 생겨 추가됨
+- Service Data Unit <-> Protocol Data unit 변환을 주요하게 함.
 - .
-- Channel Sounding
+- Channel Sounding: Preciese distance measurement.
+- PBR(Phase Based Ranging): 파형의 위상차를 통해 거리측정하는 방식
+- RTT(Round Trip Timimg): 패킷의 회신까지 걸리는 시간으로 측정하는 방식
 
 ---
 
-Major Changes
+Transport Architecture
+- 
