@@ -1,7 +1,5 @@
-<img width="1528" height="2000" alt="image" src="https://github.com/user-attachments/assets/b0ff850d-8a44-45e7-90cd-077dc2e740fd" />
-
-
 Bluetooth란?
+===
 - Bluetooth Classic / Bluetooth Low Energy (다른 종류면 서로 통신 안됨) + Bluetooth Smart Ready (둘 다 되는거)
 - 차량에서는 거의 모든 장칙에 BT가 들어감.
 - 가끔 BLE도 씀. 가령 테슬라 차량의 TPMS(Tire Pressure Monitoring System)는 BLE를 사용중에 있음. --> 보안 취약점 이었음.
@@ -17,7 +15,10 @@ Bluetooth Core Specification?
 - Bluetooth SIG Qualificiation Process를 통과하려면 여기를 준수해야 한다. (아니면 그냥 통신 장비임)
 - Core Specification + 내가 원하는 기능 추가 가능. Airpods 같은건 Apple 기기 끼리만 추가 작동하는 기능들이 추가되어 있음.
 
----
+Core System Archetecture
+===
+
+<img width="1528" height="2000" alt="image" src="https://github.com/user-attachments/assets/b0ff850d-8a44-45e7-90cd-077dc2e740fd" />
 
 Architecture - BT
 - 2.4GHz ISM band
@@ -113,7 +114,6 @@ Core architectural block: Controller
 - PBR(Phase Based Ranging): 파형의 위상차를 통해 거리측정하는 방식
 - RTT(Round Trip Timimg): 패킷의 회신까지 걸리는 시간으로 측정하는 방식
 
----
 
 Transport Architecture
-- 
+===
